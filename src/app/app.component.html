@@ -4,8 +4,9 @@
 <div class="container">
 
   <mat-form-field id="bloc1" >
-    <mat-select (selectionChange)='fetchData($event.value)'>
-      <mat-option disabled="true">Select city</mat-option>
+    <mat-label>Select City</mat-label>
+    <mat-select (selectionChange)='fetchData($event.value)' (opened)="fetchData($event.value)">
+      <!-- <mat-option disabled="true">Select city</mat-option> -->
       <mat-option [value]="city" *ngFor="let city of cityList">{{city}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -71,7 +72,7 @@
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator #paginator [pageSizeOptions]="[25, 50, 100]" aria-label="Select page">
+  <mat-paginator #paginator [pageSizeOptions]="[5, 10, 15,25, 50, 100]" aria-label="Select page">
   </mat-paginator>
 
 </div>
