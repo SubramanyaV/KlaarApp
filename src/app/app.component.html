@@ -1,8 +1,11 @@
+<h1>Bank Branches</h1>
+
+
 <div class="container">
 
-  <mat-form-field id="bloc1" appearance="fill">
+  <mat-form-field id="bloc1" >
     <mat-select (selectionChange)='fetchData($event.value)'>
-      <mat-option>Select city</mat-option>
+      <mat-option disabled="true">Select city</mat-option>
       <mat-option [value]="city" *ngFor="let city of cityList">{{city}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -15,9 +18,17 @@
 
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="position">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+
+    <ng-container matColumnDef="favourite">
+      <th mat-header-cell *matHeaderCellDef id="first"> Favourite  </th>
+      <!-- <td mat-cell *matCellDef="let item"> {{item.favourite}} </td> -->
+      <td  mat-cell *matCellDef="let item, let i = index">
+        <button mat-icon-button (click)="toggleFavourite(i)">
+          <mat-icon *ngIf="item.favourite==='Yes'">grade</mat-icon>
+          <mat-icon *ngIf="item.favourite==='No'">star_border</mat-icon>
+        </button>
+      </td>
+    
     </ng-container>
 
     <ng-container matColumnDef="bank_name">
@@ -52,7 +63,7 @@
       <td mat-cell *matCellDef="let item"> {{item.state}} </td>
     </ng-container>
     <ng-container matColumnDef="bank_id">
-      <th mat-header-cell *matHeaderCellDef> Bank Id </th>
+      <th mat-header-cell *matHeaderCellDef id="last"> Bank Id </th>
       <td mat-cell *matCellDef="let item"> {{item.bank_id}} </td>
     </ng-container>
 
